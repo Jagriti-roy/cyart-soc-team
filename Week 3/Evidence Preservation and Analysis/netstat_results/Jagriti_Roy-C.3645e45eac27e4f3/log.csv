@@ -1,0 +1,8 @@
+client_time,level,message
+1775041005,INFO,"Starting query execution for Windows.Network.Netstat.
+"
+1775041005,DEFAULT,Windows.Network.Netstat: Time 0: Windows.Network.Netstat: Sending response part 0 30 kB (157 rows).
+1775041005,INFO,"Collection Windows.Network.Netstat is done after 511.4015ms
+"
+1775041005,DEBUG,"Query Stats: {""RowsScanned"":41238,""PluginsCalled"":5,""FunctionsCalled"":0,""ProtocolSearch"":6,""ScopeCopy"":123146}
+"

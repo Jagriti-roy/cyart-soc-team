@@ -1,0 +1,82 @@
+{
+ "hunt_id": "H.D76FQ3GE23EBA",
+ "create_time": "1775041806424294",
+ "creator": "admin",
+ "expires": "1775646439215000",
+ "start_request": {
+  "creator": "admin",
+  "flow_id": "F.D76FQ3GE23EBA.H",
+  "artifacts": [
+   "Windows.Memory.Acquisition"
+  ],
+  "specs": [
+   {
+    "artifact": "Windows.Memory.Acquisition",
+    "parameters": {
+     "env": [
+      {
+       "key": "ServiceName",
+       "value": "memdump"
+      },
+      {
+       "key": "Compression",
+       "value": "S2"
+      }
+     ]
+    }
+   }
+  ],
+  "max_upload_bytes": "1073741824",
+  "compiled_collector_args": [
+   {
+    "query_id": "1",
+    "total_queries": "1",
+    "precondition": "SELECT OS FROM info()\nWHERE OS = 'windows'\n  AND Architecture = \"amd64\"\n  AND version(function='winpmem') >= 0\n",
+    "env": [
+     {
+      "key": "ServiceName",
+      "value": "memdump"
+     },
+     {
+      "key": "DriverPath",
+      "value": "C:\\Windows\\Temp\\winpmem.sys"
+     },
+     {
+      "key": "Compression",
+      "value": "S2"
+     }
+    ],
+    "Query": [
+     {
+      "VQL": "LET precondition_Windows_Memory_Acquisition_0 = SELECT OS FROM info() WHERE OS = 'windows'  AND Architecture = \"amd64\"  AND version(function='winpmem') >= 0"
+     },
+     {
+      "VQL": "LET Tempfile <= tempfile(extension=\".pmem\")"
+     },
+     {
+      "VQL": "LET ImageInfo <= winpmem(driver_path=DriverPath, service=ServiceName, image_path=Tempfile, compression=Compression)"
+     },
+     {
+      "VQL": "LET Windows_Memory_Acquisition_0_2 = SELECT ImageInfo, upload(file=Tempfile, name=\"PhysicalMemory.dd\") AS Upload FROM stat(filename=Tempfile) WHERE log(message=\"Uploading %v bytes\", args=Size)"
+     },
+     {
+      "Name": "Windows.Memory.Acquisition",
+      "VQL": "SELECT * FROM if(then=Windows_Memory_Acquisition_0_2, condition=precondition_Windows_Memory_Acquisition_0, else={ SELECT * FROM scope() WHERE log(message='Query skipped due to precondition')  AND FALSE })"
+     }
+    ],
+    "max_row": "1000"
+   }
+  ]
+ },
+ "condition": {},
+ "stats": {
+  "available_downloads": {}
+ },
+ "artifacts": [
+  "Windows.Memory.Acquisition"
+ ],
+ "artifact_sources": [
+  "Windows.Memory.Acquisition"
+ ],
+ "state": "PAUSED"
+}

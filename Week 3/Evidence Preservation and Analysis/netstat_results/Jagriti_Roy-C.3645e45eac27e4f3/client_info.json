@@ -1,0 +1,25 @@
+{
+ "client_id": "C.3645e45eac27e4f3",
+ "hostname": "Jagriti_Roy",
+ "fqdn": "Jagriti_Roy",
+ "system": "windows",
+ "release": "Microsoft Windows 11 Home Single Language25H2",
+ "architecture": "amd64",
+ "ip_address": "127.0.0.1:43822",
+ "ping": 1775041141505449,
+ "client_version": "0.76.1",
+ "client_name": "velociraptor",
+ "first_seen_at": 1774508328,
+ "build_time": "2026-03-25T16:40:56Z",
+ "mac_addresses": [
+  "0a:00:27:00:00:0a",
+  "22:2b:20:62:05:5f",
+  "26:2b:20:62:05:5f",
+  "20:2b:20:62:05:5f",
+  "20:2b:20:62:05:60"
+ ],
+ "last_interrogate_flow_id": "F.D72DIA075JIEA",
+ "last_interrogate_artifact_name": "Generic.Client.Info/BasicInformation",
+ "last_hunt_timestamp": 1775041002954347,
+ "last_event_table_version": 1775040169834286300
+}

@@ -1,0 +1,65 @@
+{
+ "client_id": "C.3645e45eac27e4f3",
+ "session_id": "F.D76FJQK6ATGG8.H",
+ "request": {
+  "creator": "admin",
+  "client_id": "C.3645e45eac27e4f3",
+  "flow_id": "F.D76FJQK6ATGG8.H",
+  "artifacts": [
+   "Windows.Network.Netstat"
+  ],
+  "specs": [
+   {
+    "artifact": "Windows.Network.Netstat",
+    "parameters": {}
+   }
+  ],
+  "max_upload_bytes": 1073741824,
+  "compiled_collector_args": [
+   {
+    "query_id": 1,
+    "total_queries": 1,
+    "precondition": "SELECT OS From info() where OS = 'windows'",
+    "Query": [
+     {
+      "VQL": "LET precondition_Windows_Network_Netstat_0 = SELECT OS FROM info() WHERE OS = 'windows'"
+     },
+     {
+      "VQL": "LET processes \u003c= SELECT Name, Pid AS ProcPid FROM pslist()"
+     },
+     {
+      "VQL": "LET Windows_Network_Netstat_0_1 = SELECT Pid, { SELECT Name FROM processes WHERE Pid = ProcPid } AS Name, FamilyString AS Family, TypeString AS Type, Status, Laddr.IP, Laddr.Port, Raddr.IP, Raddr.Port, Timestamp FROM netstat()"
+     },
+     {
+      "Name": "Windows.Network.Netstat",
+      "VQL": "SELECT * FROM if(then=Windows_Network_Netstat_0_1, condition=precondition_Windows_Network_Netstat_0, else={ SELECT * FROM scope() WHERE log(message='Query skipped due to precondition')  AND FALSE })"
+     }
+    ],
+    "max_row": 1000
+   }
+  ]
+ },
+ "create_time": 1775041005019928,
+ "start_time": 1775041005041937,
+ "active_time": 1775041005553937,
+ "total_collected_rows": 157,
+ "total_logs": 4,
+ "total_requests": 1,
+ "execution_duration": 512000000,
+ "state": 2,
+ "artifacts_with_results": [
+  "Windows.Network.Netstat"
+ ],
+ "query_stats": [
+  {
+   "duration": 512000000,
+   "last_active": 1775041005553937,
+   "first_active": 1775041005041937,
+   "names_with_response": [
+    "Windows.Network.Netstat"
+   ],
+   "log_rows": 4,
+   "result_rows": 157
+  }
+ ]
+}

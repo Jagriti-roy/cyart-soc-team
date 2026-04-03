@@ -1,0 +1,4 @@
+{"client_time":1775041005,"level":"INFO","message":"Starting query execution for Windows.Network.Netstat.\n"}
+{"client_time":1775041005,"level":"DEFAULT","message":"Windows.Network.Netstat: Time 0: Windows.Network.Netstat: Sending response part 0 30 kB (157 rows)."}
+{"client_time":1775041005,"level":"INFO","message":"Collection Windows.Network.Netstat is done after 511.4015ms\n"}
+{"client_time":1775041005,"level":"DEBUG","message":"Query Stats: {\"RowsScanned\":41238,\"PluginsCalled\":5,\"FunctionsCalled\":0,\"ProtocolSearch\":6,\"ScopeCopy\":123146}\n"}

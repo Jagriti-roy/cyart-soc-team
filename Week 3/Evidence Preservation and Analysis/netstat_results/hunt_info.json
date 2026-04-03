@@ -1,0 +1,87 @@
+{
+ "hunt_id": "H.D76FJQK6ATGG8",
+ "version": "1775041006040290100",
+ "create_time": "1775041002954347",
+ "creator": "admin",
+ "start_time": "1775041002954347",
+ "expires": "1775645657417000",
+ "hunt_description": "Collecting active network connections from Windows VM using Netstat artifact\n",
+ "tags": [
+  "netstat"
+ ],
+ "start_request": {
+  "creator": "admin",
+  "flow_id": "F.D76FJQK6ATGG8.H",
+  "artifacts": [
+   "Windows.Network.Netstat"
+  ],
+  "specs": [
+   {
+    "artifact": "Windows.Network.Netstat",
+    "parameters": {}
+   }
+  ],
+  "max_upload_bytes": "1073741824",
+  "compiled_collector_args": [
+   {
+    "query_id": "1",
+    "total_queries": "1",
+    "precondition": "SELECT OS From info() where OS = 'windows'",
+    "Query": [
+     {
+      "VQL": "LET precondition_Windows_Network_Netstat_0 = SELECT OS FROM info() WHERE OS = 'windows'"
+     },
+     {
+      "VQL": "LET processes <= SELECT Name, Pid AS ProcPid FROM pslist()"
+     },
+     {
+      "VQL": "LET Windows_Network_Netstat_0_1 = SELECT Pid, { SELECT Name FROM processes WHERE Pid = ProcPid } AS Name, FamilyString AS Family, TypeString AS Type, Status, Laddr.IP, Laddr.Port, Raddr.IP, Raddr.Port, Timestamp FROM netstat()"
+     },
+     {
+      "Name": "Windows.Network.Netstat",
+      "VQL": "SELECT * FROM if(then=Windows_Network_Netstat_0_1, condition=precondition_Windows_Network_Netstat_0, else={ SELECT * FROM scope() WHERE log(message='Query skipped due to precondition')  AND FALSE })"
+     }
+    ],
+    "max_row": "1000"
+   }
+  ]
+ },
+ "condition": {},
+ "stats": {
+  "total_clients_scheduled": "1",
+  "total_clients_with_results": "1",
+  "available_downloads": {
+   "files": [
+    {
+     "name": "H.D76FJQK6ATGG8-summary",
+     "path": "downloads/hunts/H.D76FJQK6ATGG8/H.D76FJQK6ATGG8-summary.zip",
+     "type": "zip",
+     "complete": true,
+     "size": "3220",
+     "stats": {
+      "timestamp": "1775041111",
+      "total_uncompressed_bytes": "21906",
+      "total_compressed_bytes": "3220",
+      "total_container_files": "2",
+      "hash": "f003ba77b3c399056bbe933e5c5fe14289cb24aa1e97e6e75a309b04c915c211",
+      "components": [
+       "downloads",
+       "hunts",
+       "H.D76FJQK6ATGG8",
+       "H.D76FJQK6ATGG8-summary.zip"
+      ],
+      "type": "zip",
+      "error": "Complete"
+     }
+    }
+   ]
+  }
+ },
+ "artifacts": [
+  "Windows.Network.Netstat"
+ ],
+ "artifact_sources": [
+  "Windows.Network.Netstat"
+ ],
+ "state": "RUNNING"
+}
